@@ -21,9 +21,12 @@ window.onload = function () {
         prev = document.getElementById('prev'),
         timeLine = document.getElementById('time-line'),
         timeA = document.getElementById('timeA'),
-        timeB = document.getElementById('timeB');
+        timeB = document.getElementById('timeB'),
+        volume = document.getElementById('volume');
 
     start();
+
+    console.log(player);
 
     player.on('timeChange', function (time) {
         timeA.innerHTML = formatTime(time);
@@ -38,9 +41,13 @@ window.onload = function () {
     player.on('pause', function () {
         play.className = 'flaticon-arrows';
     });
+    player.on('volume', function (vol) {
+        volume.children[1].style.width = (vol * 100) + '%';
+    });
     player.on('endFile', function () {
         next.click();
     });
+    player.volume(0.5);
 
 
     play.onclick = function () {
@@ -62,6 +69,9 @@ window.onload = function () {
     };
     timeLine.onclick = function (e) {
         player.seek(e.layerX / timeLine.clientWidth * player.duration);
+    };
+    volume.onclick = function (e) {
+        player.volume(e.layerX / volume.clientWidth);
     };
 
     function start() {

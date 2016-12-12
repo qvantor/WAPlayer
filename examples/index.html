@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WAPlayer</title>
     <script src="../lib/WAPlayer.js"></script>
     <script src="js/index.js"></script>
 
@@ -10,21 +10,32 @@
     <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
+<header>WAPlayer</header>
 <div class="player" id="player">
     <div class="visual"></div>
     <div class="controls">
-        <div class="time-control">
+        <div class="slider-control">
             <div class="time timeA" id="timeA"></div>
             <div class="time timeB" id="timeB"></div>
-            <div class="time-line" id="time-line">
+            <div class="line" id="time-line">
                 <div class="all"></div>
                 <div class="played" id="played"></div>
             </div>
         </div>
+
         <div class="buttons">
             <i class="flaticon-track" id="prev"></i>
             <i class="flaticon-player" id="play"></i>
             <i class="flaticon-play" id="next"></i>
+        </div>
+        <div class="volume">
+            <div class="slider-control">
+                <i class="flaticon-sound icon"></i>
+                <div class="line" id="volume">
+                    <div class="all"></div>
+                    <div class="played"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

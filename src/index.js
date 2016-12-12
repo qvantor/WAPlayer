@@ -1,17 +1,32 @@
 import {Visualization} from './visualization/';
 
 class Player {
-    constructor() {
+    constructor(config) {
+        config = config || {};
         this.ctx = new AudioContext();
         this.gain = this.ctx.createGain();
         this.analyser = this.ctx.createAnalyser();
         this.paused = true;
         this.time = 0;
 
+        if (config.filters) {
+            this.filters = [];
+            config.filters.forEach((filter) => {
+                let f = this.ctx.createBiquadFilter();
+
+                f.type = filter.type || 'peaking';
+                f.frequency.value = filter.frequency || 350;
+                f.gain.value = filter.gain || 0;
+                f.Q.value = filter.Q || 0;
+                this.filters.push(f);
+            });
+        }
+
         this.events = {
             play: [],
             pause: [],
             timeChange: [],
+            volume: [],
             seek: [],
             load: [],
             loaded: [],
@@ -74,6 +89,7 @@ class Player {
 
     volume(vol) {
         this.gain.gain.value = vol;
+        this._emit('volume', vol);
     }
 
     seek(time) {
@@ -133,8 +149,21 @@ class Player {
         this.source = this.ctx.createBufferSource();
         this.source.connect(this.gain);
 
-        this.source.connect(this.analyser);
-        this.gain.connect(this.ctx.destination);
+        if (this.filters && this.filters.length > 0) {
+            for (let i = 0; i < this.filters.length; i++) {
+                if (i === 0) {
+                    this.gain.connect(this.filters[i]);
+                } else {
+                    this.filters[i - 1].connect(this.filters[i]);
+                }
+            }
+
+            this.filters[this.filters.length - 1].connect(this.analyser);
+            this.filters[this.filters.length - 1].connect(this.ctx.destination);
+        } else {
+            this.gain.connect(this.analyser);
+            this.gain.connect(this.ctx.destination);
+        }
 
         this.source.buffer = this.buffer;
     }

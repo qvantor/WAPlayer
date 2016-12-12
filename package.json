@@ -1,6 +1,6 @@
 {
   "name": "waplayer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "lib/waplayer.js",
   "scripts": {
@@ -24,7 +24,16 @@
   "repository": {
     "type": "git"
   },
-  "keywords": [],
+  "keywords": [
+    "audio",
+    "sound",
+    "web audio",
+    "webaudio",
+    "audiocontext",
+    "player",
+    "music",
+    "equalizer"
+  ],
   "author": "Serg Nikolaev",
   "license": "MIT"
 }
