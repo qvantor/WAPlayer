@@ -130,6 +130,11 @@ class Player {
         });
     }
 
+    destroy() {
+        clearInterval(this._interval);
+        this.ctx.close();
+    }
+
     on(event, cb) {
         if (this.events[event] && typeof cb === 'function') {
             this.events[event].push(cb);

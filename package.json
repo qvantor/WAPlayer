@@ -1,7 +1,7 @@
 {
   "name": "waplayer",
-  "version": "0.0.2",
-  "description": "",
+  "version": "0.0.3",
+  "description": "WAPlayer - Web Audio based player",
   "main": "lib/waplayer.js",
   "scripts": {
     "build": "webpack --mode=build",

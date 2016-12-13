@@ -1,0 +1,29 @@
+{
+  "name": "waplayer",
+  "description": "WAPlayer - Web Audio based player",
+  "main": "lib/waplayer.js",
+  "authors": [
+    "Serg Nikolaev"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "audio",
+    "sound",
+    "web",
+    "audio",
+    "webaudio",
+    "audiocontext",
+    "player",
+    "music",
+    "equalizer"
+  ],
+  "homepage": "https://github.com/qvantor/WAPlayer",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
