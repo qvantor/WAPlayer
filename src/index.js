@@ -6,6 +6,7 @@ class Player {
         this.ctx = new AudioContext();
         this.gain = this.ctx.createGain();
         this.analyser = this.ctx.createAnalyser();
+        this.panner = this.ctx.createStereoPanner();
         this.paused = true;
         this.time = 0;
 
@@ -152,7 +153,8 @@ class Player {
 
     _createSource() {
         this.source = this.ctx.createBufferSource();
-        this.source.connect(this.gain);
+        this.source.connect(this.panner);
+        this.panner.connect(this.gain);
 
         if (this.filters && this.filters.length > 0) {
             for (let i = 0; i < this.filters.length; i++) {

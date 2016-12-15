@@ -30,6 +30,7 @@ window.onload = function () {
             'mp3/Custom Phase - Overwatch-Hop.mp3'
         ],
         song = 0,
+        DOMplayer = document.getElementById('player'),
         play = document.getElementById('play'),
         played = document.getElementById('played'),
         next = document.getElementById('next'),
@@ -50,8 +51,7 @@ window.onload = function () {
                 param: 'value',
                 orient: 'vertical'
             }),
-            q = new
-                Range({
+            q = new Range({
                 min: 0,
                 max: 1,
                 val: item.Q,
@@ -87,7 +87,6 @@ window.onload = function () {
         next.click();
     });
     player.volume(0.5);
-
 
     play.onclick = function () {
         player.toggle();
