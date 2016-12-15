@@ -1,5 +1,20 @@
 window.onload = function () {
-    let player = new WAPlayer.Player(),
+    let player = new WAPlayer.Player({
+            filters: [
+                {type: 'peaking', frequency: 50, Q: 0.5},
+                {type: 'peaking', frequency: 100, Q: 0.5},
+                {type: 'peaking', frequency: 300, Q: 0.5},
+                {type: 'peaking', frequency: 500, Q: 0.5},
+                {type: 'peaking', frequency: 700, Q: 0.5},
+                {type: 'peaking', frequency: 1000, Q: 0.5},
+                {type: 'peaking', frequency: 1500, Q: 0.5},
+                {type: 'peaking', frequency: 2000, Q: 0.5},
+                {type: 'peaking', frequency: 3500, Q: 0.5},
+                {type: 'peaking', frequency: 5000, Q: 0.5},
+                {type: 'peaking', frequency: 10000, Q: 0.5},
+                {type: 'peaking', frequency: 15000, Q: 0.5}
+            ]
+        }),
         visualisation = new WAPlayer
             .Visualization.default(player.analyser,
             {
@@ -22,11 +37,35 @@ window.onload = function () {
         timeLine = document.getElementById('time-line'),
         timeA = document.getElementById('timeA'),
         timeB = document.getElementById('timeB'),
-        volume = document.getElementById('volume');
+        volume = document.getElementById('volume'),
+        showEQ = document.getElementById('showEQ');
 
     start();
 
-    console.log(player);
+    player.filters.forEach(function (item) {
+        var gain = new Range({
+                min: -20,
+                max: 20,
+                val: item.gain,
+                param: 'value',
+                orient: 'vertical'
+            }),
+            q = new
+                Range({
+                min: 0,
+                max: 1,
+                val: item.Q,
+                step: 0.05,
+                param: 'value'
+            }),
+            div = document.createElement('div'),
+            qDiv = document.createElement('div');
+        qDiv.setAttribute('class', 'q-range');
+        document.getElementsByClassName('eq')[0].appendChild(div);
+        div.appendChild(gain.element);
+        div.appendChild(qDiv);
+        qDiv.appendChild(q.element);
+    });
 
     player.on('timeChange', function (time) {
         timeA.innerHTML = formatTime(time);
@@ -72,6 +111,9 @@ window.onload = function () {
     };
     volume.onclick = function (e) {
         player.volume(e.layerX / volume.clientWidth);
+    };
+    showEQ.onclick = function (e) {
+        document.getElementById('eq').classList.toggle('show');
     };
 
     function start() {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>WAPlayer</title>
     <script src="../lib/WAPlayer.js"></script>
+    <script src="js/range.js"></script>
     <script src="js/index.js"></script>
 
     <link href="font/flaticon.css" rel="stylesheet">
@@ -11,7 +12,13 @@
 </head>
 <body>
 <header>WAPlayer</header>
+<div class="eq-cont">
+    <div class="eq" id="eq"></div>
+</div>
 <div class="player" id="player">
+    <div class="top-right">
+        <i class="flaticon-technology" id="showEQ"></i>
+    </div>
     <div class="visual"></div>
     <div class="controls">
         <div class="slider-control">
