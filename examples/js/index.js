@@ -15,15 +15,21 @@ window.onload = function () {
                 {type: 'peaking', frequency: 15000, Q: 0.5}
             ]
         }),
-        visualisation = new WAPlayer
-            .Visualization.default(player.analyser,
-            {
+        visualization,
+        visuals = [{
+            name: 'default',
+            params: {
                 selector: '.visual',
                 gardient: [
                     [0, 'rgba(234,169,223, 1)'],
                     [1, 'rgba(166,123,193,1)']
                 ]
-            }),
+            }
+        }, {
+            name: 'circle',
+            params: {selector: '.visual'}
+        }],
+        visual = 0,
         songs = [
             'mp3/Custom Phase - Black  White.mp3',
             'mp3/Custom Phase - Overcast.mp3',
@@ -39,7 +45,8 @@ window.onload = function () {
         timeA = document.getElementById('timeA'),
         timeB = document.getElementById('timeB'),
         volume = document.getElementById('volume'),
-        showEQ = document.getElementById('showEQ');
+        showEQ = document.getElementById('showEQ'),
+        nextVisualization = document.getElementById('nextVisualization');
 
     start();
 
@@ -114,6 +121,18 @@ window.onload = function () {
     showEQ.onclick = function (e) {
         document.getElementById('eq').classList.toggle('show');
     };
+    nextVisualization.onclick = function (e) {
+        if (visualization) {
+            visualization.destroy();
+        }
+        visual++;
+        if (visual >= visuals.length) {
+            visual = 0;
+        }
+        visualization = new WAPlayer
+            .Visualization[visuals[visual].name](player.analyser, visuals[visual].params);
+    };
+    nextVisualization.click();
 
     function start() {
         player.load(songs[song])

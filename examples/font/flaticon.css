@@ -26,26 +26,30 @@
     content: "\f100";
 }
 
-.flaticon-play:before {
+.flaticon-equalizer:before {
     content: "\f101";
 }
 
-.flaticon-player:before {
+.flaticon-play:before {
     content: "\f102";
 }
 
-.flaticon-sound:before {
+.flaticon-player:before {
     content: "\f103";
 }
 
-.flaticon-stop:before {
+.flaticon-sound:before {
     content: "\f104";
 }
 
-.flaticon-technology:before {
+.flaticon-stop:before {
     content: "\f105";
 }
 
-.flaticon-track:before {
+.flaticon-technology:before {
     content: "\f106";
+}
+
+.flaticon-track:before {
+    content: "\f107";
 }

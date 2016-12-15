@@ -9,6 +9,7 @@ export class Visualization {
         this.parent.appendChild(this.canvas);
         this.canvasCtx = this.canvas.getContext('2d');
         this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+        this.destroyed = false;
 
         this.grd = this.canvasCtx.createLinearGradient(0, 255, 0, 0);
         config.gardient.forEach((item) => {
@@ -42,6 +43,13 @@ export class Visualization {
         this.canvasCtx.lineWidth = 0.001;
         this.canvasCtx.stroke();
 
-        requestAnimationFrame(this.animation.bind(this));
+        if (!this.destroyed) {
+            requestAnimationFrame(this.animation.bind(this));
+        }
+    }
+
+    destroy() {
+        this.destroyed = true;
+        this.parent.removeChild(this.canvas);
     }
 }
